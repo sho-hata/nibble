@@ -17,13 +17,13 @@
 Run without installing:
 
 ```bash
-npx nibble
+npx @sho-hata/nibble
 ```
 
 Or install globally:
 
 ```bash
-npm install -g nibble
+npm install -g @sho-hata/nibble
 nibble
 ```
 
