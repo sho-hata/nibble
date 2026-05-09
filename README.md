@@ -43,7 +43,7 @@ Presents 5 randomly selected bookmarks from Chrome (use `-n` to change the numbe
      That blog post from last year — note.com
      ...
 
-j/k: move  d: delete  o: open  Enter: confirm  Esc: cancel
+j/k: move  d: remove from bookmarks  o: open in browser  Enter: confirm
 ```
 
 ### Key bindings
@@ -53,27 +53,27 @@ j/k: move  d: delete  o: open  Enter: confirm  Esc: cancel
 | `j` / `↓` | Move to next item |
 | `k` / `↑` | Move to previous item |
 | `o` | Mark to open in browser (green) |
-| `d` | Mark for deletion (red) |
-| `Enter` | Confirm — opens marked items, deletes marked items |
-| `Esc` | Cancel and exit |
+| `d` | Mark to remove from bookmarks (red) |
+| `Enter` | Confirm — opens marked items, removes marked items |
+| `Ctrl+C` | Cancel and exit |
 
 To show 10 candidates:
 
 ```bash
-npx nibble -n 10
+npx @sho-hata/nibble -n 10
 ```
 
 ### Auto mode
 
 ```bash
-npx nibble --auto
+npx @sho-hata/nibble --auto
 ```
 
 Picks one bookmark and opens it immediately — useful for cron jobs or automation.
 
 ```bash
 # Open a random bookmark every morning at 9am
-0 9 * * * npx nibble --auto
+0 9 * * * npx @sho-hata/nibble --auto
 ```
 
 ## How it works

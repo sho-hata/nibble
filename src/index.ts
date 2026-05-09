@@ -18,7 +18,29 @@ const parseCount = (): number => {
 
 const isChromeRunning = (): boolean => spawnSync("pgrep", ["-x", "Google Chrome"]).status === 0;
 
+const printHelp = (): void => {
+  console.log(`Usage: nibble [options]
+
+Options:
+  -n <number>   Number of bookmarks to suggest (default: ${DEFAULT_SUGGEST_COUNT})
+  --auto        Open one random bookmark immediately
+  --help, -h    Show this help message
+
+Key bindings:
+  j / ↓         Move to next item
+  k / ↑         Move to previous item
+  o             Mark to open in browser
+  d             Mark to remove from bookmarks
+  Enter         Confirm
+  Ctrl+C        Cancel and exit`);
+};
+
 const main = async (): Promise<void> => {
+  if (process.argv.includes("--help") || process.argv.includes("-h")) {
+    printHelp();
+    return;
+  }
+
   const auto = process.argv.includes("--auto");
   const count = parseCount();
 

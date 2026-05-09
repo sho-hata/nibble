@@ -43,7 +43,7 @@ Chrome のブックマークから 5 件をランダムに提示します（`-n`
      気になっていたツール — github.com
      ...
 
-j/k: move  d: delete  o: open  Enter: confirm  Esc: cancel
+j/k: move  d: remove from bookmarks  o: open in browser  Enter: confirm
 ```
 
 ### キー操作
@@ -55,25 +55,25 @@ j/k: move  d: delete  o: open  Enter: confirm  Esc: cancel
 | `o` | 選択中のブックマークをブラウザで開く（緑色に） |
 | `d` | 選択中のブックマークを削除マーク（赤色に） |
 | `Enter` | 確定（開くマーク・削除マークを実行） |
-| `Esc` | キャンセルして終了 |
+| `Ctrl+C` | キャンセルして終了 |
 
 10 件表示したい場合:
 
 ```bash
-npx nibble -n 10
+npx @sho-hata/nibble -n 10
 ```
 
 ### 自動モード
 
 ```bash
-npx nibble --auto
+npx @sho-hata/nibble --auto
 ```
 
 候補を 1 件だけ選んでそのままブラウザで開きます。cron や自動化スクリプトに向いています。
 
 ```bash
 # 毎朝 9 時にランダムなブックマークを開く
-0 9 * * * npx nibble --auto
+0 9 * * * npx @sho-hata/nibble --auto
 ```
 
 ## しくみ
