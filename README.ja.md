@@ -17,13 +17,13 @@
 インストールなしで実行:
 
 ```bash
-npx nibble
+npx @sho-hata/nibble
 ```
 
 グローバルインストール:
 
 ```bash
-npm install -g nibble
+npm install -g @sho-hata/nibble
 nibble
 ```
 
