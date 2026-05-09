@@ -1,5 +1,26 @@
 {
   "name": "nibble",
+  "version": "0.1.0",
+  "description": "A CLI tool that randomly surfaces forgotten Chrome bookmarks",
+  "author": "sho-hata <syouki100241@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sho-hata/nibble.git"
+  },
+  "homepage": "https://github.com/sho-hata/nibble#readme",
+  "bugs": {
+    "url": "https://github.com/sho-hata/nibble/issues"
+  },
+  "keywords": [
+    "bookmarks",
+    "chrome",
+    "cli",
+    "productivity"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
@@ -20,9 +41,6 @@
     "@types/bun": "latest",
     "oxfmt": "^0.48.0",
     "oxlint": "^1.63.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
   },
   "dependencies": {
     "@inquirer/checkbox": "^5.1.4"
