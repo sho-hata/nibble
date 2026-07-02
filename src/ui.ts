@@ -5,6 +5,21 @@ export type PromptResult = {
   toDelete: string[];
 };
 
+// Truncate a string so its display width (CJK chars count as 2) fits within max,
+// preventing terminal line wrapping that breaks cursor-based re-rendering.
+const truncateToWidth = (s: string, max: number): string => {
+  if (Bun.stringWidth(s) <= max) return s;
+  let out = "";
+  let width = 0;
+  for (const ch of s) {
+    const w = Bun.stringWidth(ch);
+    if (width + w > max - 1) break;
+    out += ch;
+    width += w;
+  }
+  return `${out}…`;
+};
+
 const getHostname = (url: string): string => {
   try {
     return new URL(url).hostname;
@@ -22,6 +37,7 @@ export const prompt = (candidates: BookmarkUrl[]): Promise<PromptResult> => {
     const totalLines = candidates.length + 2;
 
     const render = (firstRender = false) => {
+      const maxWidth = (process.stdout.columns ?? 80) - 1;
       if (!firstRender) {
         process.stdout.write(`\x1b[${totalLines}A`);
       }
@@ -34,7 +50,10 @@ export const prompt = (candidates: BookmarkUrl[]): Promise<PromptResult> => {
         const prefix = isActive ? "▶" : " ";
         const delMark = del ? "✗" : " ";
         const openMark = open ? "→" : " ";
-        let line = `${prefix} ${delMark}${openMark} ${title} — ${hostname}`;
+        let line = truncateToWidth(
+          `${prefix} ${delMark}${openMark} ${title} — ${hostname}`,
+          maxWidth,
+        );
 
         if (del && open) line = `\x1b[33m${line}\x1b[0m`;
         else if (del) line = `\x1b[31m${line}\x1b[0m`;
@@ -44,7 +63,7 @@ export const prompt = (candidates: BookmarkUrl[]): Promise<PromptResult> => {
         process.stdout.write(`\x1b[2K\r${line}\n`);
       }
       process.stdout.write(`\x1b[2K\r\n`);
-      process.stdout.write(`\x1b[2K\r\x1b[2m${hintLine}\x1b[0m\n`);
+      process.stdout.write(`\x1b[2K\r\x1b[2m${truncateToWidth(hintLine, maxWidth)}\x1b[0m\n`);
     };
 
     render(true);
