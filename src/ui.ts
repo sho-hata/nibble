@@ -50,7 +50,10 @@ export const prompt = (candidates: BookmarkUrl[]): Promise<PromptResult> => {
         const prefix = isActive ? "▶" : " ";
         const delMark = del ? "✗" : " ";
         const openMark = open ? "→" : " ";
-        let line = truncateToWidth(`${prefix} ${delMark}${openMark} ${title} — ${hostname}`, maxWidth);
+        let line = truncateToWidth(
+          `${prefix} ${delMark}${openMark} ${title} — ${hostname}`,
+          maxWidth,
+        );
 
         if (del && open) line = `\x1b[33m${line}\x1b[0m`;
         else if (del) line = `\x1b[31m${line}\x1b[0m`;
